@@ -7,6 +7,17 @@
 
 	<select id="selectUsersTotal" resultType="int">
 		SELECT COUNT(*) FROM user_info
+		<where>
+			<if test='uiNum != null and uiNum != 0'>
+				AND UI_NUM=#{uiNum}
+			</if>
+			<if test='uiName != null and uiName !=""'>
+				AND UI_NAME LIKE CONCAT('%',#{uiName},'%')
+			</if>
+			<if test='uiId != null and uiId != ""'>
+				AND UI_ID = #{uiId}
+			</if>
+		</where>
 	</select>
 	
 	<select id="selectUsers" resultType="com.test.spboot.vo.UserInfoVO">

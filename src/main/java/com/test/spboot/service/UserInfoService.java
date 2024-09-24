@@ -20,7 +20,7 @@ public class UserInfoService {
 			userInfo.setCount(10);
 		}
 		if(userInfo.getPage()!=0) {
-			int start = (userInfo.getPage()-1) * 10;
+			int start = (userInfo.getPage()-1) * userInfo.getCount();
 			userInfo.setStart(start);
 		}
 		ResultList<UserInfoVO> rl = new ResultList<>();
