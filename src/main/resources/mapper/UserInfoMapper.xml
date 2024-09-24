@@ -4,6 +4,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- src/main/resources/mapper/UserInfoMapper.xml -->
 <mapper namespace="com.test.spboot.mapper.UserInfoMapper">
+
+	<select id="selectUsersTotal" resultType="int">
+		SELECT COUNT(*) FROM user_info
+	</select>
+	
 	<select id="selectUsers" resultType="com.test.spboot.vo.UserInfoVO">
 		SELECT UI_PWD, UI_NUM, UI_NAME, UI_ID, UI_HOBBY,
 		UI_GENDER, UI_DESC, UI_BIRTH, CRETIM,
@@ -21,6 +26,7 @@
 			</if>
 		</where>
 		ORDER BY UI_NUM DESC
+		LIMIT #{start}, #{count}
 	</select>
 	<select id="selectUser" resultType="com.test.spboot.vo.UserInfoVO">
 		SELECT UI_PWD, UI_NUM, UI_NAME, UI_ID, UI_HOBBY,

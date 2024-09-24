@@ -5,10 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="/js/ajax.js"></script>
 </head>
 <body>
-<a href="javascript:alert(1);">가자</a>
+<div id="rDiv"></div>
 <script>
+const config = {
+		method : 'GET',
+		url : '/cars',
+		callback : function(res){
+			document.querySelector('#rDiv').innerHTML = res;
+		}
+}
+ajax(config);
 </script>
 </body>
 </html>

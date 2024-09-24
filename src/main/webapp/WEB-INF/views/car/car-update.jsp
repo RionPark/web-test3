@@ -24,22 +24,35 @@
 <script>
 	window.onload = getCar;
 	const ciNum = '${param.ciNum}';
-	function getCar(){
+	
+	const ajax = function(method, url, callback){
 		const xhr = new XMLHttpRequest();
-		xhr.open('GET','/cars/' + ciNum);
+		xhr.open(method,url)
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState === 4){
 				if(xhr.status === 200){
-					console.log(xhr.responseText);
-					const car = JSON.parse(xhr.responseText);
-					for(const key in car){
-						document.querySelector('#' + key).value = car[key];
-					}
+					callback(xhr.responseText);
 				}
 			}
 		}
 		xhr.send();
 	}
+	
+	const method = 'GET';
+	const url = '/cars/' + ciNum);
+	const callback = function(res){
+		const car = JSON.parse(res);
+		for(const key in car){
+			document.querySelector('#' + key).value = car[key];
+		}
+	}
+	ajax('GET','/cars/' + ciNum, function(res){
+		const car = JSON.parse(res);
+		for(const key in car){
+			document.querySelector('#' + key).value = car[key];
+		}
+	});
+	
 	function updateCar(){
 		var param = {
 				ciNum : document.querySelector('#ciNum').value,

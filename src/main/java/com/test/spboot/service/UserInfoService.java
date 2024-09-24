@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.test.spboot.mapper.UserInfoMapper;
+import com.test.spboot.vo.GoodsInfoVO;
+import com.test.spboot.vo.ResultList;
 import com.test.spboot.vo.UserInfoVO;
 
 @Service
@@ -13,8 +15,20 @@ public class UserInfoService {
 	@Autowired
 	private UserInfoMapper uiMapper;
 	
-	public List<UserInfoVO> selectUsers(UserInfoVO userInfo) {
-		return uiMapper.selectUsers(userInfo);
+	public ResultList<UserInfoVO> selectUsers(UserInfoVO userInfo) {
+		if(userInfo.getCount()==0) {
+			userInfo.setCount(10);
+		}
+		if(userInfo.getPage()!=0) {
+			int start = (userInfo.getPage()-1) * 10;
+			userInfo.setStart(start);
+		}
+		ResultList<UserInfoVO> rl = new ResultList<>();
+		List<UserInfoVO> users = uiMapper.selectUsers(userInfo);
+		rl.setList(users);
+		int totalCnt = uiMapper.selectUsersTotal(userInfo);
+		rl.setCount(totalCnt);
+		return rl;
 	}
 	
 	public UserInfoVO selectUser(int uiNum) {

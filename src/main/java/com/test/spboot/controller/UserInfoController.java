@@ -1,7 +1,5 @@
 package com.test.spboot.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.spboot.service.UserInfoService;
+import com.test.spboot.vo.ResultList;
 import com.test.spboot.vo.UserInfoVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +22,9 @@ public class UserInfoController {
 	private UserInfoService uiService;
 	
 	@GetMapping("/users")
-	public List<UserInfoVO> getUsers(UserInfoVO userInfo){
-		return uiService.selectUsers(userInfo);
+	public ResultList<UserInfoVO> getUsers(UserInfoVO userInfo){
+		ResultList<UserInfoVO> rl =  uiService.selectUsers(userInfo);
+		return rl;
 	}
 	
 	@GetMapping("/users/{uiNum}")
