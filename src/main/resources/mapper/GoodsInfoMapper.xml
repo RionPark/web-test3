@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- src/main/resources/mapper/UserInfoMapper.xml -->
+<mapper namespace="com.test.spboot.mapper.GoodsInfoMapper">
+	<select id="selectGoodsList" resultType="com.test.spboot.vo.GoodsInfoVO">
+		SELECT GI_NUM, GI_NAME, GI_PRICE, GI_DESC, CREDAT
+		FROM goods_info
+	</select>
+	<select id="selectGoods" resultType="com.test.spboot.vo.GoodsInfoVO">
+		SELECT GI_NUM, GI_NAME, GI_PRICE, GI_DESC, CREDAT
+		FROM goods_info
+		WHERE GI_NUM=#{giNum}
+	</select>
+	<insert id="insertGoods" parameterType="com.test.spboot.vo.GoodsInfoVO">
+		INSERT INTO goods_info(GI_NAME, GI_PRICE, GI_DESC)
+		VALUES(#{giName},#{giPrice},#{giDesc})
+	</insert>
+	<update id="updateGoods" parameterType="com.test.spboot.vo.GoodsInfoVO">
+		UPDATE goods_info
+		SET GI_NAME=#{giName},
+		GI_PRICE=#{giPrice},
+		GI_DESC=#{giDesc}
+		WHERE GI_NUM=#{giNum}
+	</update>
+	<delete id="deleteGoods">
+		DELETE FROM goods_info WHERE GI_NUM=#{giNum}
+	</delete>
+</mapper>

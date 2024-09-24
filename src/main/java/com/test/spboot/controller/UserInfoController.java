@@ -24,18 +24,19 @@ public class UserInfoController {
 	
 	@GetMapping("/users")
 	public List<UserInfoVO> getUsers(UserInfoVO userInfo){
-		log.info("userInfo=>{}", userInfo);
 		return uiService.selectUsers(userInfo);
-	} 
+	}
+	
 	@GetMapping("/users/{uiNum}")
 	public UserInfoVO getUser(@PathVariable("uiNum")int uiNum) {
-		log.info("uiNum=>{}", uiNum);
 		return uiService.selectUser(uiNum);
 	}
+	
 	@DeleteMapping("/users/{uiNum}")
-	public int removeUser(@PathVariable("uiNum")int uiNum) {
+	public int removeUser(@PathVariable("uiNum") int uiNum) {
 		return uiService.deleteUser(uiNum);
 	}
+	
 	@PostMapping("/users")
 	public int addUser(@RequestBody UserInfoVO userInfo) {
 		return uiService.insertUser(userInfo);

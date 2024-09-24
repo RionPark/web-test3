@@ -57,6 +57,7 @@ function getCars(){
 	xhr.send();
 }
 window.onload = getCars;
+
 </script>
 </body>
 </html>
