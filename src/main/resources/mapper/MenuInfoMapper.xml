@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- src/main/resources/mapper/CarInfoMapper.xml -->
+<mapper namespace="com.test.spboot.mapper.MenuInfoMapper">
+	<select id="selectMenus" resultType="com.test.spboot.vo.MenuInfoVO">
+		SELECT MI_NUM, MI_NAME, MI_PRICE, MI_DESC, MI_PATH
+		FROM
+		menu_info
+	</select>
+	<select id="selectMenu" resultType="com.test.spboot.vo.MenuInfoVO">
+		SELECT MI_NUM, MI_NAME, MI_PRICE, MI_DESC, MI_PATH
+		FROM
+		menu_info
+		WHERE MI_NUM=#{miNum}
+	</select>
+	<insert id="insertMenu">
+		INSERT INTO menu_info(MI_NAME, MI_PRICE, MI_DESC, MI_PATH)
+		VALUES(#{miName},#{miPrice},#{miDesc},#{miPath})
+	</insert>
+	<update id="updateMenu">
+		UPDATE menu_info
+		SET MI_NAME=#{miName},
+		MI_PRICE=#{miPrice},
+		MI_DESC=#{miDesc},
+		MI_PATH=#{miPath}
+		WHERE MI_NUM=#{miNum}
+	</update>
+	<delete id="deleteMenu">
+		DELETE FROM menu_info WHERE MI_NUM=#{miNum}
+	</delete>
+</mapper>

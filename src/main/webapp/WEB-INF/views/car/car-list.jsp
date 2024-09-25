@@ -5,6 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="/boot/css/bootstrap.css"/>
+<link rel="stylesheet" href="/boot/css/bootstrap-grid.css"/>
+<link rel="stylesheet" href="/boot/css/bootstrap-reboot.css"/>
+<link rel="stylesheet" href="/boot/css/bootstrap-utilities.css"/>
+<script src="/boot/js/bootstrap.bundle.js"></script>
+<script src="/boot/js/bootstrap.js"></script>
 </head>
 <body>
 <input type="text" id="ciNum"  placeholder="번호">
@@ -22,12 +29,13 @@
 <a href="/views/car/car-insert">차량등록</a>
 <script>
 
-function getCars(){
+function getCars(page){
 	var xhr = new XMLHttpRequest();
 	var url = '/cars?';
 	url += 'ciNum=' + document.querySelector('#ciNum').value;
 	url += '&ciName=' + document.querySelector('#ciName').value;
 	url += '&ciYear=' + document.querySelector('#ciYear').value;
+	url += '&page=' + page;
 
 	xhr.open('GET',url);
 	
@@ -56,7 +64,7 @@ function getCars(){
 	}
 	xhr.send();
 }
-window.onload = getCars;
+window.onload = getCars.bind(null,1);
 
 </script>
 </body>

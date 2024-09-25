@@ -8,7 +8,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class UserInfoVO {
-	
 	private int uiNum;
 	private int start;
 	private int count;

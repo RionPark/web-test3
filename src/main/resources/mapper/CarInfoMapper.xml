@@ -4,6 +4,21 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- src/main/resources/mapper/CarInfoMapper.xml -->
 <mapper namespace="com.test.spboot.mapper.CarInfoMapper">
+
+	<select id="selectCarTotal" resultType="int">
+		SELECT COUNT(*) FROM CAR_INFO 
+		<where>
+			<if test='ciNum != null and ciNum != 0'>
+				AND CI_NUM=#{ciNum}
+			</if>
+			<if test='ciName != null and ciName !=""'>
+				AND CI_NAME LIKE CONCAT('%',#{ciName},'%')
+			</if>
+			<if test='ciYear != null and ciYear != ""'>
+				AND CI_YEAR = #{ciYear}
+			</if>
+		</where>
+	</select>
 	<select id="selectCars" resultType="com.test.spboot.vo.CarInfoVO">
 		SELECT CI_NUM, CI_NAME, CI_YEAR FROM CAR_INFO
 		<where>
@@ -17,6 +32,8 @@
 				AND CI_YEAR = #{ciYear}
 			</if>
 		</where>
+		ORDER BY CI_NUM DESC
+		LIMIT #{start}, #{count}
 	</select>
 	<select id="selectCar" resultType="com.test.spboot.vo.CarInfoVO">
 		SELECT CI_NUM, CI_NAME, CI_YEAR FROM CAR_INFO where CI_NUM=#{ciNum}

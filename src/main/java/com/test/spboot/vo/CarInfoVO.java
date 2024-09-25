@@ -11,4 +11,7 @@ public class CarInfoVO {
 	private Integer ciNum;
 	private String ciName;
 	private String ciYear;
+	private int start;
+	private int count;
+	private int page;
 }
