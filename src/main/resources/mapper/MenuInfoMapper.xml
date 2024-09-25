@@ -23,8 +23,10 @@
 		UPDATE menu_info
 		SET MI_NAME=#{miName},
 		MI_PRICE=#{miPrice},
-		MI_DESC=#{miDesc},
-		MI_PATH=#{miPath}
+		MI_DESC=#{miDesc}
+		<if test='miPath != null and miPath != ""'>
+		, MI_PATH=#{miPath}
+		</if>
 		WHERE MI_NUM=#{miNum}
 	</update>
 	<delete id="deleteMenu">

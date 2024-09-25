@@ -28,7 +28,7 @@
 					for(const menu of menus){
 						html += '<tr>';
 						html += '<td>' + menu.miNum + '</td>';
-						html += '<td>' + menu.miName + '</td>';
+						html += '<td><a href="/views/menu/menu-update?miNum=' + menu.miNum + '">' + menu.miName + '</a></td>';
 						html += '<td>' + menu.miPrice + '원</td>';
 						if(menu.miPath){
 							html += '<td><img src="' + menu.miPath + '" width="200" height="100"></td>';

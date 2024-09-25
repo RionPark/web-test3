@@ -51,12 +51,46 @@ public class MenuInfoService {
 	}
 	
 	public int updateMenu(MenuInfoVO menu) {
-		
-		int result = miMapper.updateMenu(menu);
-		return result;
+		try {
+			MultipartFile miFile = menu.getMiFile();
+			if(miFile != null) {
+				MenuInfoVO preMenu = selectMenu(menu.getMiNum());
+				String miPath = preMenu.getMiPath();
+				if(miPath!=null && !"".equals(miPath)) {
+					miPath = miPath.replace("/upload/","");
+					File f = new File(UPLOAD_PATH + miPath);
+					if(f.exists()) {
+						f.delete();
+					}
+				}
+					
+				String name = miFile.getOriginalFilename();
+				int idx = name.lastIndexOf(".");
+				String ext = name.substring(idx);
+				name = System.nanoTime() + ext;
+				
+				File f = new File(UPLOAD_PATH + name);
+				miFile.transferTo(f);
+				menu.setMiPath("/upload/" + name);
+			}
+			int result = miMapper.updateMenu(menu);
+			return result;
+		}catch(Exception e) {
+			log.error("upload error=>{}",e);
+		}
+		return 0;
 	}
 	
 	public int deleteMenu(int miNum) {
+		MenuInfoVO preMenu = selectMenu(miNum);
+		String miPath = preMenu.getMiPath();
+		if(miPath!=null && !"".equals(miPath)) {
+			miPath = miPath.replace("/upload/","");
+			File f = new File(UPLOAD_PATH + miPath);
+			if(f.exists()) {
+				f.delete();
+			}
+		}
 		int result = miMapper.deleteMenu(miNum);
 		return result;
 	}

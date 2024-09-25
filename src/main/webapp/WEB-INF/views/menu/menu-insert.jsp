@@ -21,8 +21,9 @@ function addMenu(){
 	formData.append('miPrice',document.querySelector("#miPrice").value);
 	formData.append('miDesc',document.querySelector("#miDesc").value);
 	const miFile = document.querySelector('#miFile');
-	console.log(miFile.files);
-	formData.append('miFile',miFile.files[0]);
+	if(miFile.files[0]){
+		formData.append('miFile',miFile.files[0]);
+	}
 	xhr.open('POST','/menus');
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState === 4){
